@@ -106,7 +106,7 @@ def test_update_user_exception(client, user, token):
             'id': 1,
         },
     )
-    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert response.status_code == HTTPStatus.FORBIDDEN
     assert response.json() == {'detail': 'Not enough permission'}
 
 
@@ -122,5 +122,5 @@ def test_delete_user_exception(client, user, token):
     response = client.delete(
         f'/users/{user.id + 1}', headers={'Authorization': f'Bearer {token}'}
     )
-    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert response.status_code == HTTPStatus.FORBIDDEN
     assert response.json() == {'detail': 'Not enough permission'}
